@@ -1,27 +1,40 @@
 import React, { Component } from 'react';
-import SearchForm from './components/searchForm/searchForm';
-import Products from './components/products/Products';
+import Routes from './components/routes/Routes'
+import axios from 'axios';
 
 export class App extends Component {
   constructor(props) {
     super(props)
   
     this.state = {
-       products:true,
-       char:'',
        productsArray:[]
     }
   }
 
-  handleSubmit = (data)=>{
-    
-  }
-  
+  // handleSubmit = (data)=>{
+  //   var config = {
+  //     method: 'get',
+  //     url: `https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${data}`,
+  //     headers: { 
+  //       'Content-Type': 'application/json'
+  //     }
+  //   };
+  //   axios(config)
+  //   .then(function (response) {
+  //     console.log(response);
+  //   })
+  //   .catch(function (error) {
+  //     console.log(error);
+  //   });
+  // }  
   render() {
-    const {products,productsArray} = this.state
-    let component = products ? <SearchForm submit={this.handleSubmit} /> : <Products array={productsArray}/>
+    const {productsArray} = this.state
+
     return (
-      {component}
+      // <SearchForm submit={this.handleSubmit} />
+      <div>
+        <Routes />
+      </div>
     )
   }
 }

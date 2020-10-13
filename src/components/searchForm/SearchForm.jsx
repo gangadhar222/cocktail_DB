@@ -1,21 +1,23 @@
 import React, { Component } from "react";
+import { connect } from 'react-redux';
 import "./style.css";
+import {getData} from '../../redux/action';
 
-export class searchForm extends Component {
+export class SearchForm extends Component {
     constructor(props) {
         super(props)
     
         this.state = {
-             name:''
+             name:'',
         }
     }
 
     handleChange = (e)=>{
         this.setState({
             name:e.target.value
-        },()=>{console.log(this.state.name)})
+        })
     }
-    
+
   render() {
     return (
       <div className="container">
@@ -24,11 +26,15 @@ export class searchForm extends Component {
           <div className="input">
             <input placeholder="enter a char to search" name="name" value={this.state.name} onChange={this.handleChange} />
           </div>
-          <button className="btn" onClick={()=>this.props.submit(this.state.name)}>Search</button>
+          <button className="btn" onClick={()=>this.props.getData(this.state.name)}>Search</button>
         </div>
       </div>
     );
   }
 }
 
-export default searchForm;
+const mapDispatchToProps = dispatch => ({
+  getData: (payload) => dispatch(getData(payload))
+})
+
+export default connect(null, mapDispatchToProps)(SearchForm)
